@@ -1,22 +1,31 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Board } from "../models/Board";
 import { Cell } from "../models/Cell";
+import { Player } from "../models/Player";
 import CellComponent from "./Cell";
 
 export interface IBoardProps {
   board: Board;
   setBoard: (board: Board) => void;
+  currentPlayer: Player | null;
+  swapPlayers: () => void;
 }
 
-export default function BoardComponent({ board, setBoard }: IBoardProps) {
+export default function BoardComponent({
+  board,
+  setBoard,
+  currentPlayer,
+  swapPlayers,
+}: IBoardProps) {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
   function click(cell: Cell) {
     if (selectedCell && cell.available) {
       selectedCell.moveFigure(cell);
       setSelectedCell(null);
+      swapPlayers();
     } else {
-      if (cell.figure) setSelectedCell(cell);
+      if (cell.figure?.color === currentPlayer?.color) setSelectedCell(cell);
       else setSelectedCell(null);
     }
   }

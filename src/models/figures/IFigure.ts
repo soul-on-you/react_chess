@@ -36,6 +36,10 @@ export abstract class Figure implements IFigure {
     this.color = color;
   }
 
+  isEnemy(figure: IFigure): boolean {
+    return this.color !== figure.color;
+  }
+
   canMove(target: Cell): boolean {
     if (target.figure?.color === this.color) return false;
     if (target.figure?.type === FigureTypes.KING) return false;

@@ -4,7 +4,7 @@ import { Colors } from "./Colors";
 import { IFigure } from "./figures/IFigure";
 
 export class Cell {
-  private readonly _board: Board;
+  readonly _board: Board;
   readonly x: number;
   readonly y: number;
   readonly color: Colors;

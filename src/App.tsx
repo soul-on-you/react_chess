@@ -9,6 +9,7 @@ function App() {
   const restart = () => {
     const newBoard = new Board();
     newBoard.initCells();
+    newBoard.initFigures();
     setBoard(newBoard);
   };
 
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <div className="app">
-      <BoardComponent board={board} setBoard={setBoard}/>
+      <BoardComponent board={board} setBoard={setBoard} />
     </div>
   );
 }

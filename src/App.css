@@ -26,10 +26,33 @@
   align-items: center;
 }
 
+
 .black {
-  background-color: #000;
+  background-color: rgb(102, 85, 85);
 }
 
 .white {
   background-color: #eee;
+}
+
+
+.selected {
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  background-color: rgb(124, 155, 214);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avaliable{
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: rgb(86, 201, 255);
+}
+
+.canKill{
+  background-color: rgb(255, 38, 38);
 }

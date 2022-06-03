@@ -1,9 +1,22 @@
 import { Cell } from "../Cell";
 import { Figure, FigureTypes } from "./IFigure";
+import logoBlack from "../../assets/black-bishop.svg";
+import logoWhite from "../../assets/white-bishop.svg";
+import { Colors } from "../Colors";
 
 export class Bishop extends Figure {
-  moveFigure(target: Cell): void {
-    throw new Error("Method not implemented.");
+  readonly logo: string;
+  readonly type: FigureTypes = FigureTypes.BISHOP;
+
+  constructor(cell: Cell, color: Colors) {
+    super(cell, color);
+    this.logo = color === Colors.BLACK ? logoBlack : logoWhite;
   }
-  type: FigureTypes = FigureTypes.BISHOP;
+
+  public override canMove(target: Cell): boolean {
+    if (super.canMove(target))
+      if (this.cell.isEmptyDiagonal(target)) return true;
+    return false;
+  }
+  moveFigure(target: Cell): void {}
 }

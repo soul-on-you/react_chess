@@ -1,6 +1,5 @@
 import { Cell } from "../Cell";
 import { Colors } from "../Colors";
-import logo from "../../assets/black-bishop.svg";
 import { nanoid } from "nanoid";
 
 export enum FigureTypes {
@@ -14,9 +13,9 @@ export enum FigureTypes {
 
 export interface IFigure {
   id: string;
-  logo: typeof logo | null;
+  logo: string;
   cell: Cell;
-  color: Colors;
+  readonly color: Colors;
   type: FigureTypes;
 
   canMove(target: Cell): boolean;
@@ -25,23 +24,23 @@ export interface IFigure {
 
 export abstract class Figure implements IFigure {
   id: string;
-  logo: string | null;
   cell: Cell;
   color: Colors;
-  abstract type: FigureTypes;
+  abstract logo: string;
+  abstract readonly type: FigureTypes;
 
   constructor(cell: Cell, color: Colors) {
     this.id = nanoid(10);
-    this.logo = logo;
     this.cell = cell;
     this.cell.figure = this;
     this.color = color;
   }
 
   canMove(target: Cell): boolean {
+    if (target.figure?.color === this.color) return false;
+    if (target.figure?.type === FigureTypes.KING) return false;
     return true;
   }
 
   abstract moveFigure(target: Cell): void;
 }
-
